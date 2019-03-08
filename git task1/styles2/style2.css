@@ -1,0 +1,55 @@
+.box_1, .box_4 {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top center;
+}
+
+body {
+  position: relative;
+  background-color: #fff;
+  line-height: 1.6;
+  font-weight: 400;
+  font-family: "Open Sans", sans-serif;
+}
+
+body ul {
+  list-style-type: none;
+}
+
+body ul a {
+  text-decoration: none;
+}
+
+body ul a:active, body ul a:hover {
+  text-decoration: none;
+}
+
+body img {
+  max-width: 100%;
+}
+
+.content {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.content-f {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.margin_norm {
+  margin: 0 -15px;
+}
+
+.header {
+  line-height: 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: #fff;
+  width: 100%;
+}
