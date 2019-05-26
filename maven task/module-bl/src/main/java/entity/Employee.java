@@ -1,19 +1,15 @@
 package entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 public class Employee {
 
     private int id;
     private String firstName;
     private String lastName;
-
-    public Employee() {
-
-    }
 
     @Override
     public String toString() {

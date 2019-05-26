@@ -1,19 +1,15 @@
 package entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 public class Car {
     private String manufacture;
     private String model;
     private int yearOfManufacture;
     private int topSpeed;
-
-    public Car() {
-
-    }
 
     @Override
     public String toString() {
