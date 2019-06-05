@@ -1,4 +1,4 @@
-package info.garagesalesapp.domain;
+package com.hillel;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
