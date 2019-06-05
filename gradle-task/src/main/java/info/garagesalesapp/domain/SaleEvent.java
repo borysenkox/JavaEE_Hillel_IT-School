@@ -1,10 +1,8 @@
 package info.garagesalesapp.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class SaleEvent {
 
     private String id;
@@ -28,7 +26,7 @@ public class SaleEvent {
         System.out.println(saleEvent.toString());
 
         JsonDisplay jsonDisplay = new JsonDisplay();
-        jsonDisplay.showJson(saleEvent);
+        System.out.println(jsonDisplay.showJson(saleEvent));
 
     }
 }

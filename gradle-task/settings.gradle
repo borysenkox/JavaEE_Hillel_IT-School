@@ -1,4 +1,3 @@
 rootProject.name = 'GradleTask'
 include 'json-interface'
 include 'json-display'
-

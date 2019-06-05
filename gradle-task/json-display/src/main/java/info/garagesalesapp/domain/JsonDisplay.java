@@ -9,7 +9,6 @@ public class JsonDisplay implements JsonInterface {
     public String showJson(Object object) {
         Gson gson = new GsonBuilder().create();
         String json = gson.toJson(object);
-        System.out.println(json);
-        return null;
+        return json;
     }
 }
