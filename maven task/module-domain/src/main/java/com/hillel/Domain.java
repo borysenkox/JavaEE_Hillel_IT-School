@@ -1,5 +1,7 @@
-import entity.Car;
-import entity.Employee;
+package com.hillel;
+
+import com.hillel.entity.Car;
+import com.hillel.entity.Employee;
 
 public class Domain {
 

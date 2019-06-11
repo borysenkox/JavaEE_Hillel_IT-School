@@ -1,4 +1,4 @@
-package entity;
+package com.hillel.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
