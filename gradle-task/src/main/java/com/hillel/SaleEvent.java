@@ -21,6 +21,5 @@ public class SaleEvent {
 
         JsonDisplay jsonDisplay = new JsonDisplay();
         System.out.println(jsonDisplay.showJson(saleEvent));
-
     }
 }
