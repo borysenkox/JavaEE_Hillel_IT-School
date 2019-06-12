@@ -1,0 +1,4 @@
+rootProject.name = 'GradleTask'
+include 'json-interface'
+include 'json-display'
+include 'main-module'
