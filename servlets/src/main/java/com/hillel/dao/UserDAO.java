@@ -1,27 +1,28 @@
 package com.hillel.dao;
 
 import com.hillel.model.User;
+import com.hillel.model.Role;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
 
-    private final List<User> storage = new ArrayList<>();
+    private List<User> storage = new ArrayList<>();
 
-    public boolean add(final User user) {
+    public boolean add(User user2) {
 
-        for (User u : storage) {
-            if (u.getLogin().equals(user.getLogin()) && u.getPassword().equals(user.getPassword())) {
+        for (User user : storage) {
+            if (user.equals(user2)) {
                 return false;
             }
         }
 
-        return storage.add(user);
+        return storage.add(user2);
     }
 
-    public User.ROLE getRoleByLoginPassword(final String login, final String password) {
-        User.ROLE result = User.ROLE.UNKNOWN;
+    public Role getRoleByLoginPassword(String login, String password) {
+        Role result = Role.UNKNOWN;
 
         for (User user : storage) {
             if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
@@ -32,7 +33,7 @@ public class UserDAO {
         return result;
     }
 
-    public boolean userIsExist(final String login, final String password) {
+    public boolean userIsExist(String login, String password) {
 
         boolean result = false;
 

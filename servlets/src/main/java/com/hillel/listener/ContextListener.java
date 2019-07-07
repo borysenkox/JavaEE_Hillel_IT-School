@@ -9,8 +9,8 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static com.hillel.model.User.ROLE.ADMIN;
-import static com.hillel.model.User.ROLE.USER;
+import static com.hillel.model.Role.ADMIN;
+import static com.hillel.model.Role.USER;
 
 @WebListener
 public class ContextListener implements ServletContextListener {
@@ -25,7 +25,7 @@ public class ContextListener implements ServletContextListener {
         dao.get().add(new User(2, "Alex", "Alex", USER));
         dao.get().add(new User(3, "Julia", "Julia", USER));
 
-        final ServletContext servletContext = servletContextEvent.getServletContext();
+        ServletContext servletContext = servletContextEvent.getServletContext();
 
         servletContext.setAttribute("dao", dao);
     }
