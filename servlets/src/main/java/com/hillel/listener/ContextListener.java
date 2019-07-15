@@ -1,37 +1,35 @@
 package com.hillel.listener;
 
-import com.hillel.dao.UserDAO;
 import com.hillel.model.User;
+import com.hillel.dao.UserDao;
+import com.hillel.service.UserService;
+import com.hillel.util.JsonUtil;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import java.util.concurrent.atomic.AtomicReference;
-
-import static com.hillel.model.Role.ADMIN;
-import static com.hillel.model.Role.USER;
 
 @WebListener
 public class ContextListener implements ServletContextListener {
-    private AtomicReference<UserDAO> dao;
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-
-        dao = new AtomicReference<>(new UserDAO());
-
-        dao.get().add(new User(1, "Sergey", "Sergey", ADMIN));
-        dao.get().add(new User(2, "Alex", "Alex", USER));
-        dao.get().add(new User(3, "Julia", "Julia", USER));
+        User user = new User();
+        UserDao userDao = new UserDao();
+        UserService userService = new UserService(userDao);
+        JsonUtil jsonUtil = new JsonUtil();
 
         ServletContext servletContext = servletContextEvent.getServletContext();
-
-        servletContext.setAttribute("dao", dao);
+        servletContext.setAttribute("userService", userService);
+        servletContext.setAttribute("storage", userDao);
+        servletContext.setAttribute("user", user);
+        servletContext.setAttribute("jsonUtil", jsonUtil);
     }
 
     @Override
-    public void contextDestroyed(ServletContextEvent sce) {
-        dao = null;
+    public void contextDestroyed(ServletContextEvent servletContextEvent) {
+
     }
+
 }
