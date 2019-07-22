@@ -1,5 +1,7 @@
 HELP.md
-/target/
+target/
+out/
+build/
 
 ### STS ###
 .apt_generated
@@ -9,6 +11,7 @@ HELP.md
 .settings
 .springBeans
 .sts4-cache
+.gradle
 
 ### IntelliJ IDEA ###
 .idea
