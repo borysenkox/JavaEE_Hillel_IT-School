@@ -1,12 +1,9 @@
 package com.hillel.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
