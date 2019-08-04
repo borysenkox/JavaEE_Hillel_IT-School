@@ -5,7 +5,7 @@
     <title>Update user: <c:out value="${requestScope.user.username}"/></title>
 </head>
 <body>
-<form method="get" action="/management/update">
+<form method="get" action="/management/user">
     <div>First name: <c:out value="${requestScope.user.firstName}"/></div>
     <div>Last name: <c:out value="${requestScope.user.lastName}"/></div>
     <div>Username: <c:out value="${requestScope.user.username}"/></div>
@@ -13,7 +13,7 @@
 
 <br>
 
-<form method="post" action="/management/update">
+<form method="post" action="/management/user">
     <label>First name: <input type="text" name="firstName"/></label><br>
     <label>Last name: <input type="text" name="lastName"/></label><br>
     <label>Username: <input type="text" name="username"/></label><br>

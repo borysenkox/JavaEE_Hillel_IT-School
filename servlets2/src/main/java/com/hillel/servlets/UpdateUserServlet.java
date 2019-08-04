@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/management/update")
+@WebServlet("/management/user")
 public class UpdateUserServlet extends HttpServlet {
     private UserDao userDao;
     private UserService userService;

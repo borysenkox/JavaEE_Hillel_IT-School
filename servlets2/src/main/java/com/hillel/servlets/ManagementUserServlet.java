@@ -15,18 +15,18 @@ import java.io.IOException;
 @WebServlet("/management")
 @Log4j
 public class ManagementUserServlet extends HttpServlet {
-    private UserDao userDao;
     private UserService userService;
+    private UserDao userDao;
 
     @Override
     public void init() {
-        userDao = (UserDao) getServletContext().getAttribute("storage");
         userService = (UserService) getServletContext().getAttribute("userService");
+        userDao = (UserDao) getServletContext().getAttribute("storage");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("users", userDao.listOfUsers());
+        req.setAttribute("users", userService.getListOfUsers());
         req.getRequestDispatcher("WEB-INF/view/management.jsp").forward(req, resp);
     }
 

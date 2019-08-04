@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/management/delete")
+@WebServlet("/management/user/delete")
 public class DeleteUserServlet extends HttpServlet {
     private UserDao userDao;
 

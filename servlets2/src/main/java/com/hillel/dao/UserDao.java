@@ -1,14 +1,12 @@
 package com.hillel.dao;
 
 import com.hillel.model.User;
-import com.hillel.service.UserService;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class UserDao {
     private List<User> users = new LinkedList<>();
-    private UserService userService;
 
     public UserDao() {
         users.add(new User("Sergey", "Borysenko", "admin", "admin", "not_logged-in", "admin"));
