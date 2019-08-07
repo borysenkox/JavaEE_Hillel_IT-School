@@ -15,7 +15,6 @@ import java.io.IOException;
 public class UpdateUserServlet extends HttpServlet {
     private UserDao userDao;
     private UserService userService;
-    private String currentUsername;
 
     @Override
     public void init() {
@@ -25,7 +24,7 @@ public class UpdateUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        currentUsername = req.getParameter("username");
+        String currentUsername = req.getParameter("username");
         User user = userService.getUserByUsername(currentUsername);
         req.setAttribute("user", user);
         req.getRequestDispatcher("/WEB-INF/view/updateUser.jsp").forward(req, resp);
@@ -33,6 +32,7 @@ public class UpdateUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String currentUsername = req.getParameter("username");
         User updatedUser = new User(req.getParameter("firstName"), req.getParameter("lastName"), req.getParameter("username"));
         userDao.updateUser(currentUsername, updatedUser);
         resp.sendRedirect("/management");
