@@ -18,8 +18,8 @@ public class UpdateUserServlet extends HttpServlet {
 
     @Override
     public void init() {
-        userDao = (UserDao) getServletContext().getAttribute("storage");
         userService = (UserService) getServletContext().getAttribute("userService");
+        userDao = (UserDao) getServletContext().getAttribute("storage");
     }
 
     @Override

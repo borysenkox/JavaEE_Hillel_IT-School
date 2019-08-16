@@ -1,57 +1,90 @@
 package com.hillel.servlets;
 
+import com.hillel.dao.UserDao;
+import com.hillel.model.User;
+import com.hillel.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.io.DataInput;
 import java.io.IOException;
 
 import static org.mockito.Mockito.*;
 
 public class LoginServletTest {
+    @InjectMocks
     private LoginServlet loginServlet;
+
+    @Mock
+    private UserDao userDao;
+    @Mock
+    private UserService userService;
+    @Mock
+    private User user;
+    @Mock
     private HttpServletRequest request;
+    @Mock
     private HttpServletResponse response;
-    private HttpSession session;
+    @Mock
     private RequestDispatcher dispatcher;
-    private String path;
-    private String errorMessage;
+    @Mock
+    private ServletConfig servletConfig;
+    @Mock
+    private ServletContext servletContext;
+    @Mock
+    private HttpSession session;
+
+    private final static String LOGINPATH = "/WEB-INF/view/login.jsp";
+    private final static String ADMINPATH = "/WEB-INF/view/adminMenu.jsp";
+    private final static String USERPATH = "/WEB-INF/view/userMenu.jsp";
 
     @Before
-    public void setUp() {
-        loginServlet = new LoginServlet();
-        request = mock(HttpServletRequest.class);
-        response = mock(HttpServletResponse.class);
-        session = mock(HttpSession.class);
-        dispatcher = mock(RequestDispatcher.class);
-        path = "/WEB-INF/view/login.jsp";
+    public void setUpInstances() {
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void doGet() throws ServletException, IOException {
-        when(request.getRequestDispatcher(path)).thenReturn(dispatcher);
+    public void initServletConfig() throws ServletException {
+        when(servletConfig.getServletContext()).thenReturn(servletContext);
+        loginServlet.init(servletConfig);
+    }
+
+    @Test
+    public void doGet_WhenMethodIsCalled_SendForwardToLoginPath() throws ServletException, IOException {
+        when(request.getRequestDispatcher(LOGINPATH)).thenReturn(dispatcher);
         loginServlet.doGet(request, response);
-
-        verify(request, times(1)).getRequestDispatcher(path);
-        verify(dispatcher).forward(request, response);
     }
 
-    @Test
-    public void doPost_returnsSuccessLoginServlet() throws ServletException, IOException {
-        errorMessage = "Bad request";
 
-        when(request.getParameter("login")).thenReturn("admin");
-        when(request.getParameter("password")).thenReturn("admin");
+    @Test
+    public void doPost_WhenMethodIsCalled_ReturnsLoginMenu() throws ServletException, IOException {
+//        when(request.getParameter("username")).thenReturn("admin");
+//        when(request.getParameter("password")).thenReturn("admin");
+//
+//        when(userService.userIsExistByLoginAndPassword("admin", "admin")).thenReturn(true);
+//        when(userService.getUserByUsername("admin")).thenReturn(user);
+//        when(userService.updateLoginStatus("admin")).thenReturn("logged-in");
+//        when(request.getSession()).thenReturn(session);
+//        when(user.getRole()).thenReturn("admin");
+//        when(request.getRequestDispatcher(ADMINPATH)).thenReturn(dispatcher);
+//        loginServlet.doPost(request, response);
+
+        when(userService.userIsExistByLoginAndPassword("notUser", "notPassword")).thenReturn(false);
+        when(userService.getUserByUsername("notUser")).thenReturn(user);
         when(request.getSession()).thenReturn(session);
-        when(request.getContextPath()).thenReturn("/user/login");
+        when(request.getRequestDispatcher(LOGINPATH)).thenReturn(dispatcher);
         loginServlet.doPost(request, response);
 
-        verify(request, times(1)).getParameter("login");
-        verify(request, times(1)).getParameter("password");
-//        verify(response, times(1)).sendError(400, errorMessage);
     }
 }
