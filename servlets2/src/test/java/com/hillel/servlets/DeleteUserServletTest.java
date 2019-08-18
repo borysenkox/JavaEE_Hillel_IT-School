@@ -1,11 +1,11 @@
 package com.hillel.servlets;
 
 import com.hillel.dao.UserDao;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -17,6 +17,7 @@ import java.io.IOException;
 
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class DeleteUserServletTest {
     @InjectMocks
     private DeleteUserServlet deleteUserServlet;
@@ -31,11 +32,6 @@ public class DeleteUserServletTest {
     private ServletContext servletContext;
     @Mock
     private ServletConfig servletConfig;
-
-    @Before
-    public void setUpInstances() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     public void initServletConfig() throws ServletException {

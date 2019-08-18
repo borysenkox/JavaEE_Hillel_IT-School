@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class AuthFilterTest {
@@ -39,17 +40,17 @@ public class AuthFilterTest {
         when(request.getSession()).thenReturn(session);
 
         when(request.getSession().getAttribute("role")).thenReturn("admin");
+        assertEquals(request.getSession().getAttribute("role"), "admin");
         when(request.getRequestDispatcher("/WEB-INF/view/adminMenu.jsp")).thenReturn(requestDispatcher);
+
         when(request.getSession().getAttribute("role")).thenReturn("user");
+        assertEquals(request.getSession().getAttribute("role"), "user");
         when(request.getRequestDispatcher("/WEB-INF/view/userMenu.jsp")).thenReturn(requestDispatcher);
+
         when(request.getRequestDispatcher("/WEB-INF/view/login.jsp")).thenReturn(requestDispatcher);
         when(request.getRequestURI()).thenReturn("/user/login/");
 
         authFilter.doFilter(request, response, filterChain);
         authFilter.destroy();
-
-        when(request.getSession().getAttribute("role")).thenReturn("Alien");
-        authFilter.doFilter(request, response, filterChain);
-
     }
 }

@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import java.io.DataInput;
 import java.io.IOException;
 
 import static org.mockito.Mockito.*;
@@ -69,17 +68,6 @@ public class LoginServletTest {
 
     @Test
     public void doPost_WhenMethodIsCalled_ReturnsLoginMenu() throws ServletException, IOException {
-//        when(request.getParameter("username")).thenReturn("admin");
-//        when(request.getParameter("password")).thenReturn("admin");
-//
-//        when(userService.userIsExistByLoginAndPassword("admin", "admin")).thenReturn(true);
-//        when(userService.getUserByUsername("admin")).thenReturn(user);
-//        when(userService.updateLoginStatus("admin")).thenReturn("logged-in");
-//        when(request.getSession()).thenReturn(session);
-//        when(user.getRole()).thenReturn("admin");
-//        when(request.getRequestDispatcher(ADMINPATH)).thenReturn(dispatcher);
-//        loginServlet.doPost(request, response);
-
         when(userService.userIsExistByLoginAndPassword("notUser", "notPassword")).thenReturn(false);
         when(userService.getUserByUsername("notUser")).thenReturn(user);
         when(request.getSession()).thenReturn(session);

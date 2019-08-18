@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class LogoutServletTest {
@@ -49,6 +50,7 @@ public class LogoutServletTest {
     public void init_ReturnsServletContext() throws ServletException {
         when(servletConfig.getServletContext()).thenReturn(servletContext);
         when(servletConfig.getServletContext().getAttribute("userService")).thenReturn(userService);
+        assertEquals(servletContext.getAttribute("userService"), userService);
         logoutServlet.init(servletConfig);
     }
 
@@ -56,6 +58,7 @@ public class LogoutServletTest {
     public void doPost_GettingUsernameFromSession_ReturnsRedirect() throws IOException{
         when(request.getSession()).thenReturn(session);
         when(request.getSession().getAttribute("username")).thenReturn("admin");
+        assertEquals(session.getAttribute("username"), "admin");
         when(request.getRequestDispatcher(PATH)).thenReturn(dispatcher);
         logoutServlet.doPost(request, response);
     }

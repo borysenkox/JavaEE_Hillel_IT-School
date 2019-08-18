@@ -4,6 +4,8 @@ import com.hillel.dao.UserDao;
 import com.hillel.model.User;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 
@@ -13,9 +15,14 @@ import static org.junit.Assert.assertThat;
 public class UserServiceTest {
     private UserService userService;
     private User expectedUser;
+
+    @InjectMocks
+    private UserDao userDao;
+
     @Before
     public void setUp() {
-        userService = new UserService(new UserDao());
+        MockitoAnnotations.initMocks(this);
+        userService = new UserService(userDao);
         expectedUser = new User("Alex", "Popov", "alex", "alex", "not_logged-in", "user");
     }
 
