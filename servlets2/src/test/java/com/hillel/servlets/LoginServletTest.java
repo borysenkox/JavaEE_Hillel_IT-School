@@ -3,11 +3,11 @@ package com.hillel.servlets;
 import com.hillel.dao.UserDao;
 import com.hillel.model.User;
 import com.hillel.service.UserService;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -21,6 +21,7 @@ import java.io.IOException;
 
 import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class LoginServletTest {
     @InjectMocks
     private LoginServlet loginServlet;
@@ -45,13 +46,6 @@ public class LoginServletTest {
     private HttpSession session;
 
     private final static String LOGINPATH = "/WEB-INF/view/login.jsp";
-    private final static String ADMINPATH = "/WEB-INF/view/adminMenu.jsp";
-    private final static String USERPATH = "/WEB-INF/view/userMenu.jsp";
-
-    @Before
-    public void setUpInstances() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     public void initServletConfig() throws ServletException {
@@ -73,6 +67,6 @@ public class LoginServletTest {
         when(request.getSession()).thenReturn(session);
         when(request.getRequestDispatcher(LOGINPATH)).thenReturn(dispatcher);
         loginServlet.doPost(request, response);
-
     }
+
 }

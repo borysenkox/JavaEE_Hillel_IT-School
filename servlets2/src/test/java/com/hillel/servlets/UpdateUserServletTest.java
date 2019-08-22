@@ -2,11 +2,11 @@ package com.hillel.servlets;
 
 import com.hillel.dao.UserDao;
 import com.hillel.service.UserService;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -20,6 +20,7 @@ import java.io.IOException;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class UpdateUserServletTest {
     private final static String PATH = "/WEB-INF/view/updateUser.jsp";
 
@@ -40,11 +41,6 @@ public class UpdateUserServletTest {
     private ServletContext servletContext;
     @Mock
     private ServletConfig servletConfig;
-
-    @Before
-    public void setUpInstances() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     public void initServletConfig() throws ServletException {

@@ -1,11 +1,11 @@
 package com.hillel.servlets;
 
 import com.hillel.service.UserService;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -20,6 +20,7 @@ import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class LogoutServletTest {
     private final static String PATH = "/";
 
@@ -41,11 +42,6 @@ public class LogoutServletTest {
     @Mock
     private ServletContext servletContext;
 
-    @Before
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
-
     @Test
     public void init_ReturnsServletContext() throws ServletException {
         when(servletConfig.getServletContext()).thenReturn(servletContext);
@@ -55,7 +51,7 @@ public class LogoutServletTest {
     }
 
     @Test
-    public void doPost_GettingUsernameFromSession_ReturnsRedirect() throws IOException{
+    public void doPost_GettingUsernameFromSession_ReturnsRedirect() throws IOException {
         when(request.getSession()).thenReturn(session);
         when(request.getSession().getAttribute("username")).thenReturn("admin");
         assertEquals(session.getAttribute("username"), "admin");

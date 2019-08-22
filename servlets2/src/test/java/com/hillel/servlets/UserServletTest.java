@@ -4,11 +4,11 @@ import com.hillel.dao.UserDao;
 import com.hillel.model.User;
 import com.hillel.service.UserService;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -19,6 +19,7 @@ import java.io.IOException;
 
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class UserServletTest {
 
     @InjectMocks
@@ -38,11 +39,6 @@ public class UserServletTest {
     @Mock
     private ServletConfig servletConfig;
 
-    @Before
-    public void setUpInstances() {
-        MockitoAnnotations.initMocks(this);
-    }
-
     @Test
     public void initServletConfig() throws ServletException {
         when(servletConfig.getServletContext()).thenReturn(servletContext);
@@ -57,7 +53,7 @@ public class UserServletTest {
     }
 
     @Test
-    public void doPut_getRequestParameters_sendErrorOrUpdateUser() throws IOException {
+    public void doPut_getRequestParameters_sendErrorOrUpdateUser() {
         when(request.getParameter("username")).thenReturn("someUserName");
         when(request.getParameter("firstname")).thenReturn("someFirstName");
         when(request.getParameter("lastname")).thenReturn("someLastName");

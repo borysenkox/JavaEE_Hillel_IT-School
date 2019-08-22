@@ -4,14 +4,16 @@ import com.hillel.dao.UserDao;
 import com.hillel.model.User;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
+@RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
     private UserService userService;
     private User expectedUser;
@@ -21,7 +23,6 @@ public class UserServiceTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         userService = new UserService(userDao);
         expectedUser = new User("Alex", "Popov", "alex", "alex", "not_logged-in", "user");
     }

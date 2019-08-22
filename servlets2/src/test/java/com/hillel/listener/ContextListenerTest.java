@@ -22,7 +22,7 @@ public class ContextListenerTest {
     private UserService jsonUtil;
 
     @Test
-    public void contextInitialized(){
+    public void contextInitialized() {
         ContextListener contextListener = new ContextListener();
 
         ServletContext servletContext = mock(ServletContext.class);
