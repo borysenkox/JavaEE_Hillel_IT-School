@@ -6,6 +6,7 @@ import lombok.*;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class User {
     private String firstName;
     private String lastName;
