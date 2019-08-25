@@ -27,11 +27,7 @@ public class LoginServletTest {
     private LoginServlet loginServlet;
 
     @Mock
-    private UserDao userDao;
-    @Mock
     private UserService userService;
-    @Mock
-    private User user;
     @Mock
     private HttpServletRequest request;
     @Mock
@@ -45,28 +41,27 @@ public class LoginServletTest {
     @Mock
     private HttpSession session;
 
-    private final static String LOGINPATH = "/WEB-INF/view/login.jsp";
+    private final static String LOGINPATH= "/WEB-INF/view/login.jsp";
+    private final static String ADMINPATH= "/WEB-INF/view/adminMenu.jsp";
+    private final static String USERPATH= "/WEB-INF/view/userMenu.jsp";
 
     @Test
     public void initServletConfig() throws ServletException {
         when(servletConfig.getServletContext()).thenReturn(servletContext);
         loginServlet.init(servletConfig);
+
+        verify(servletConfig, atLeastOnce()).getServletContext();
     }
 
     @Test
-    public void doGet_WhenMethodIsCalled_SendForwardToLoginPath() throws ServletException, IOException {
-        when(request.getRequestDispatcher(LOGINPATH)).thenReturn(dispatcher);
-        loginServlet.doGet(request, response);
-    }
-
-
-    @Test
-    public void doPost_WhenMethodIsCalled_ReturnsLoginMenu() throws ServletException, IOException {
-        when(userService.userIsExistByLoginAndPassword("notUser", "notPassword")).thenReturn(false);
-        when(userService.getUserByUsername("notUser")).thenReturn(user);
-        when(request.getSession()).thenReturn(session);
+    public void doPost_WhenMethodIsCalled_ReturnsInvalidUser() throws ServletException, IOException {
+        when(request.getParameter(anyString())).thenReturn("notUser");
+        when(userService.userIsExistByLoginAndPassword("notUser", "password")).thenReturn(false);
         when(request.getRequestDispatcher(LOGINPATH)).thenReturn(dispatcher);
         loginServlet.doPost(request, response);
+
+        verify(request, atLeastOnce()).getRequestDispatcher(LOGINPATH);
+        verify(dispatcher).forward(request, response);
     }
 
 }

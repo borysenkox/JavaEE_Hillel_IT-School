@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UsersServletTest {
@@ -43,6 +43,8 @@ public class UsersServletTest {
     public void initServletConfig() {
         when(servletConfig.getServletContext()).thenReturn(servletContext);
         usersServlet.init(servletConfig);
+
+        verify(servletConfig, atLeastOnce()).getServletContext();
     }
 
     @Test
@@ -54,13 +56,16 @@ public class UsersServletTest {
         PrintWriter printWriter = new PrintWriter(jsonFromJavaArrayList);
         when(response.getWriter()).thenReturn(printWriter);
         usersServlet.doGet(request, response);
+
+        verify(response, atLeastOnce()).getWriter();
     }
 
     @Test
     public void doGet_GettingListOfUsers_ReturnsNull() throws IOException {
         when(userService.getListOfUsers()).thenReturn(null);
-        response.sendError(404, "");
         usersServlet.doGet(request, response);
+
+        verify(response, atLeastOnce()).sendError(404, "User not found");
     }
 
 }

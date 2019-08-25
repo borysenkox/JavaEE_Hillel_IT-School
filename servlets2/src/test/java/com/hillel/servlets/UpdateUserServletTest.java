@@ -63,7 +63,6 @@ public class UpdateUserServletTest {
         when(userService.userIsExist("testUsername")).thenReturn(true);
 
         assertTrue(userService.userIsExist("testUsername"));
-        response.sendError(404, "");
         updateUserServlet.doPost(request, response);
 
         when(userService.userIsExist("testUsername")).thenReturn(false);

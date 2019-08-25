@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -53,12 +54,17 @@ public class ManagementUserServletTest {
     public void initServletConfig() throws ServletException {
         when(servletConfig.getServletContext()).thenReturn(servletContext);
         managementUserServlet.init(servletConfig);
+
+        verify(servletConfig, atLeastOnce()).getServletContext();
     }
 
     @Test
     public void doGet_WhenMethodCalled_SendForwardByPath() throws ServletException, IOException {
         when(request.getRequestDispatcher(PATH)).thenReturn(dispatcher);
         managementUserServlet.doGet(request, response);
+
+        verify(request, atLeastOnce()).getRequestDispatcher(PATH);
+        verify(dispatcher).forward(request, response);
     }
 
     @Test
@@ -73,6 +79,18 @@ public class ManagementUserServletTest {
         when(userDao.createUser(newUser)).thenReturn(true);
         when(request.getRequestDispatcher(PATH)).thenReturn(dispatcher);
         managementUserServlet.doPost(request, response);
+
+        verify(dispatcher).forward(request, response);
     }
 
+    @Test
+    public void doPost_GettingRequestParameters_returnsError() throws IOException, ServletException {
+        when(request.getParameter(anyString())).thenReturn("testUsername");
+        when(userService.userIsExist("testUsername")).thenReturn(true);
+
+        assertTrue(userService.userIsExist("testUsername"));
+        managementUserServlet.doPost(request, response);
+
+        verify(response).sendError(409, "testUsername is already exists");
+    }
 }

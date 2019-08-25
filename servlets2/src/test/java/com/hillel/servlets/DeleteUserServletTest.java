@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DeleteUserServletTest {
@@ -37,11 +37,15 @@ public class DeleteUserServletTest {
     public void initServletConfig() throws ServletException {
         when(servletConfig.getServletContext()).thenReturn(servletContext);
         deleteUserServlet.init(servletConfig);
+
+        verify(servletConfig, atLeastOnce()).getServletContext();
     }
 
     @Test
     public void doPost_ReturnsRedirectPath() throws IOException {
         when(userDao.deleteUser("userForDelete")).thenReturn(true);
         deleteUserServlet.doPost(request, response);
+
+        verify(response, atLeastOnce()).sendRedirect("/management");
     }
 }
